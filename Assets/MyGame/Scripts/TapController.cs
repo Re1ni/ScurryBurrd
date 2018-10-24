@@ -26,7 +26,7 @@ public class TapController : MonoBehaviour{
         if (Input.GetMouseButtonDown(0))
         {
             transform.rotation = forwardRotation;
-            rigidbody.AddForce(Vector7.up * tapForce, ForceMode2D.Force);
+            rigidbody.AddForce(Vector2.up * tapForce, ForceMode2D.Force);
         }
 
         transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, tiltSmooth * Time.deltaTime);

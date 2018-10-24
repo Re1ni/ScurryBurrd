@@ -610,6 +610,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c4cdeb867e59e4c8310bbfc8871ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tapForce: 150
+  tiltSmooth: 5
+  startPos: {x: -1.87, y: 1.87, z: 0}
 --- !u!1 &881662960
 GameObject:
   m_ObjectHideFlags: 0
