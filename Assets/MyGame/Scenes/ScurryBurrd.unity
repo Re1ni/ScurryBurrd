@@ -852,8 +852,9 @@ GameObject:
   - component: {fileID: 1262528405}
   - component: {fileID: 1262528407}
   - component: {fileID: 1262528406}
+  - component: {fileID: 1262528408}
   m_Layer: 5
-  m_Name: Highscore
+  m_Name: CountdownText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,6 +918,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1262528404}
   m_CullTransparentMesh: 0
+--- !u!114 &1262528408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1262528404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5ffd2e345b0ab43be1438618e54737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1264803560
 GameObject:
   m_ObjectHideFlags: 0

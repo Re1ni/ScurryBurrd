@@ -5,6 +5,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class TapController : MonoBehaviour{
+
+    public delegate void PlayerDelegate();
+    public static event PlayerDelegate OnPlayerDied;
+    public static event PlayerDelegate OnPlayerScored;
+
     public float tapForce = 10;
     public float tiltSmooth = 5;
     public Vector3 startPos;
@@ -38,12 +43,14 @@ public class TapController : MonoBehaviour{
         if (col.gameObject.tag == "scoreZone")
         {
             //register a score event
+            OnPlayerScored(); //event sent to GameManager;
             //play a sound
         }
         if (col.gameObject.tag == "deadZone")
         {
             rigidbody.simulated = false;
             //register a dead event
+            OnPlayerDied(); //event sent to GameManager;
             //play a sound
         }
     }

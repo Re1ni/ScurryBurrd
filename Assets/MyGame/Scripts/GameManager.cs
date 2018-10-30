@@ -34,6 +34,24 @@ public class GameManager : MonoBehaviour {
         Instance = this;
     }
 
+    private void OnEnable()
+    {
+        CountdownText.OnCountdownFinished += OnCountdownFinished;
+    }
+
+    private void OnDisable()
+    {
+        CountdownText.OnCountdownFinished -= OnCountdownFinished;
+    }
+
+    void OnCountdownFinished()
+    {
+        SetPageState(PageState.None);
+        OnGameStarted();
+        score = 0;
+        gameOver = false;
+    }
+
     void SetPageState(PageState state)
     {
         switch (state)
@@ -69,10 +87,14 @@ public class GameManager : MonoBehaviour {
     public void ConnfirmGameOver()
     {
         //activated when replay button is hit
+        OnGameOverConfirmed(); //event
+        scoreText.text = "0";
+        SetPageState(PageState.Start);
     }
 
     public void StartGame()
     {
         //activated when play button is hit
+        SetPageState(PageState.Countdown);
     }
 }
