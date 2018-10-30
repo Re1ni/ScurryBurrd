@@ -26,20 +26,21 @@ public class TapController : MonoBehaviour{
         if (Input.GetMouseButtonDown(0))
         {
             transform.rotation = forwardRotation;
+            rigidbody.velocity = Vector3.zero;
             rigidbody.AddForce(Vector2.up * tapForce, ForceMode2D.Force);
         }
 
         transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, tiltSmooth * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (GetComponent<Collider>().gameObject.tag == "ScoreZone")
+        if (col.gameObject.tag == "scoreZone")
         {
             //register a score event
             //play a sound
         }
-        if (GetComponent<Collider>().gameObject.tag == "DeadZone")
+        if (col.gameObject.tag == "deadZone")
         {
             rigidbody.simulated = false;
             //register a dead event
