@@ -37,19 +37,41 @@ public class GameManager : MonoBehaviour {
     private void OnEnable()
     {
         CountdownText.OnCountdownFinished += OnCountdownFinished;
+        TapController.OnPlayerDied += OnPlayerDied;
+        TapController.OnPlayerScored += OnPlayerScored;
+
     }
 
     private void OnDisable()
     {
         CountdownText.OnCountdownFinished -= OnCountdownFinished;
+        TapController.OnPlayerDied -= OnPlayerDied;
+        TapController.OnPlayerScored -= OnPlayerScored;
     }
 
     void OnCountdownFinished()
     {
         SetPageState(PageState.None);
-        OnGameStarted();
+        OnGameStarted(); //event sent to TapController
         score = 0;
         gameOver = false;
+    }
+
+    void OnPlayerScored()
+    {
+        score++;
+        scoreText.text = score.ToString();
+    }
+
+    void OnPlayerDied()
+    {
+        gameOver = true;
+        int savedScore = PlayerPrefs.GetInt("HighScore");
+        if (score > savedScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+        SetPageState(PageState.GameOver);
     }
 
     void SetPageState(PageState state)
@@ -68,26 +90,27 @@ public class GameManager : MonoBehaviour {
                 countdownPage.SetActive(false);
 
                 break;
-            case PageState.GameOver:
-                startPage.SetActive(false);
-                gameOverPage.SetActive(true);
-                countdownPage.SetActive(false);
-
-                break;
             case PageState.Countdown:
                 startPage.SetActive(false);
                 gameOverPage.SetActive(false);
                 countdownPage.SetActive(true);
 
                 break;
+            case PageState.GameOver:
+                startPage.SetActive(false);
+                gameOverPage.SetActive(true);
+                countdownPage.SetActive(false);
+
+                break;
+            
         }
 
     }
 
-    public void ConnfirmGameOver()
+    public void ConfirmGameOver()
     {
         //activated when replay button is hit
-        OnGameOverConfirmed(); //event
+        OnGameOverConfirmed(); //event sent to TapController
         scoreText.text = "0";
         SetPageState(PageState.Start);
     }
